@@ -1,0 +1,12 @@
+<schemalist gettext-domain="activate_gnome">
+  <schema id="org.gnome.shell.extensions.activate_gnome" path="/org/gnome/shell/extensions/activate_gnome/">
+    <key name="text-l1" type="s">
+      <default>'Activate Gnome'</default>
+      <summary>Text to display on line No.1</summary>
+    </key>
+    <key name="text-l2" type="s">
+      <default>'Go to Settings to activate Gnome.'</default>
+      <summary>Text to display on line No.2</summary>
+    </key>
+  </schema>
+</schemalist>

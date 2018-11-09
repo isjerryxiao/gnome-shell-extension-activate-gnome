@@ -1,0 +1,10 @@
+{
+ "extension-id": "activate_gnome",
+ "uuid": "activate_gnome@jerryxiao",
+ "settings-schema": "org.gnome.shell.extensions.activate_gnome",
+ "gettext-domain": "activate_gnome",
+ "name": "Gnome is not activated",
+ "description": "Shows Activate Gnome watermark on your screen.",
+ "shell-version": [ "3.30" ],
+ "url": "https://github.com/Jerry981028/activate_gnome"
+}
