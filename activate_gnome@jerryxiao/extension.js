@@ -20,8 +20,8 @@ function _show() {
     label_1 = new St.Label({ style_class: 'label-1', text: text1 });
     label_2 = new St.Label({ style_class: 'label-2', text: text2 });
     let monitor = Main.layoutManager.primaryMonitor;
-    var h = Math.floor(monitor.height / 20 * 19 - label_2.height);
-    var w = Math.floor (monitor.width / 15 * 14 - label_2.width);
+    var h = Math.floor(monitor.height / 18 * 17 - label_2.height);
+    var w = Math.floor(monitor.width / 10 * 9 - label_2.width);
     global.stage.add_actor(label_2);
     label_2.set_position(w, h);
     global.stage.add_actor(label_1);
