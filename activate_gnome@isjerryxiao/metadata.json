@@ -1,0 +1,11 @@
+{
+  "name": "activate_gnome",
+  "description": "Shows Activate Gnome watermark on your screen.",
+  "uuid": "activate_gnome@isjerryxiao",
+  "shell-version": [
+    "40",
+    "41"
+  ],
+  "version": 1,
+  "url": "https://github.com/isjerryxiao/activate_gnome"
+}
