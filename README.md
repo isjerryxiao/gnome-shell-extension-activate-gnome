@@ -10,5 +10,11 @@ make -C activate_gnome/activate_gnome@isjerryxiao
 ln -s $(realpath activate_gnome/activate_gnome@isjerryxiao) ~/.local/share/gnome-shell/extensions/
 ```  
 
+## Screenshot
+![screenshot](https://pb.meson.cc/s/c030srhz.png)  
+
+## And customizable
+![customize](https://pb.meson.cc/s/c7uvyjrd.png)  
+
 ## Contributing
 * Copyright © 2021 JerryXiao
