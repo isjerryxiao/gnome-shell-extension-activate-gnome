@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="activate_gnome">
+  <schema id="org.gnome.shell.extensions.activate_gnome" path="/org/gnome/shell/extensions/activate_gnome/">
+    <!-- See also: https://developer.gnome.org/glib/stable/gvariant-format-strings.html -->
+    <key name="text-l1" type="s">
+      <default>'Activate Gnome'</default>
+      <summary>Text to display on line 1</summary>
+    </key>
+    <key name="text-l2" type="s">
+      <default>'Go to Settings to activate Gnome.'</default>
+      <summary>Text to display on line 2</summary>
+    </key>
+    <key name="l2-vertical" type="d">
+      <default>0.9444444444444444</default>
+      <summary>Vertical position of line 2</summary>
+    </key>
+    <key name="l2-horizontal" type="d">
+      <default>0.9</default>
+      <summary>Horizontal position of line 2</summary>
+    </key>
+  </schema>
+</schemalist>
