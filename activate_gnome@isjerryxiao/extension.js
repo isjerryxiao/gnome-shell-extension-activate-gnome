@@ -28,11 +28,18 @@ class Extension {
         this.label_2 = null
         this.loaded = 0
         this.settings = null
+        this.handler_id = null
     }
 
     update() {
         if (this.label_1 && this.label_2) {
-            let [text1, text2, vl2, hl2] = this.settings
+            let settings = this.settings
+            let text1 = settings.get_string('text-l1') || settings.get_default_value('text-l1').get_string()
+            let text2 = settings.get_string('text-l2') || settings.get_default_value('text-l2').get_string()
+            let vl2 = settings.get_double('l2-vertical') || settings.get_default_value('l2-vertical').get_double()
+            let hl2 = settings.get_double('l2-horizontal') || settings.get_default_value('l2-horizontal').get_double()
+            this.label_1.text = text1
+            this.label_2.text = text2
             let monitor = Main.layoutManager.primaryMonitor
             let h = Math.floor(monitor.height * vl2 - this.label_2.height)
             let w = Math.floor(monitor.width * hl2 - this.label_2.width)
@@ -44,15 +51,12 @@ class Extension {
             }
         }
     }
+
     enable() {
-        let settings = ExtensionUtils.getSettings(Me.metadata['settings-schema'])
-        let text1 = settings.get_string('text-l1') || settings.get_default_value('text-l1').get_string()
-        let text2 = settings.get_string('text-l2') || settings.get_default_value('text-l2').get_string()
-        let vl2 = settings.get_double('l2-vertical') || settings.get_default_value('l2-vertical').get_double()
-        let hl2 = settings.get_double('l2-horizontal') || settings.get_default_value('l2-horizontal').get_double()
-        this.settings = [text1, text2, vl2, hl2]
-        this.label_2 = new St.Label({ style_class: 'label-2', text: text2 })
-        this.label_1 = new St.Label({ style_class: 'label-1', text: text1 })
+        this.settings = ExtensionUtils.getSettings(Me.metadata['settings-schema'])
+        this.handler_id = this.settings.connect('changed', () => this.update())
+        this.label_2 = new St.Label({ style_class: 'label-2', text: '' })
+        this.label_1 = new St.Label({ style_class: 'label-1', text: '' })
         Main.layoutManager.addTopChrome(this.label_2, {"trackFullscreen": false})
         Main.layoutManager.addTopChrome(this.label_1, {"trackFullscreen": false})
         this.update()
@@ -65,7 +69,9 @@ class Extension {
         this.label_2.destroy()
         this.label_1 = null
         this.label_2 = null
+        this.settings.disconnect(this.handler_id)
         this.settings = null
+        this.handler_id = null
     }
 }
 

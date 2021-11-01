@@ -15,7 +15,7 @@
       <summary>Vertical position of line 2</summary>
     </key>
     <key name="l2-horizontal" type="d">
-      <default>0.9</default>
+      <default>0.92</default>
       <summary>Horizontal position of line 2</summary>
     </key>
   </schema>
