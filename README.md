@@ -4,6 +4,9 @@
 A gnome-shell extension to show 'Activate Gnome' watermark.  
 
 ## Installation
+### From extensions.gnome.org
+[link](https://extensions.gnome.org/extension/4574/activate_gnome)  
+### From git
 ```
 git clone https://github.com/isjerryxiao/gnome-shell-extension-activate-gnome activate_gnome
 make -C activate_gnome
