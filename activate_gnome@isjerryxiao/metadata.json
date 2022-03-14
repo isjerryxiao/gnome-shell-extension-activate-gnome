@@ -5,8 +5,9 @@
     "settings-schema": "org.gnome.shell.extensions.activate_gnome",
     "shell-version": [
         "40",
-        "41"
+        "41",
+        "42"
     ],
-    "version": 3,
+    "version": 4,
     "url": "https://github.com/isjerryxiao/gnome-shell-extension-activate-gnome"
 }

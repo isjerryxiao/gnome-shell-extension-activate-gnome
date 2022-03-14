@@ -24,27 +24,33 @@ const Me = ExtensionUtils.getCurrentExtension()
 
 class Extension {
     constructor() {
-        this.label_1 = null
-        this.label_2 = null
+        this.labels = []
         this.loaded = 0
         this.settings = null
         this.handler_id = null
     }
 
     update() {
-        if (this.label_1 && this.label_2) {
-            let settings = this.settings
-            let text1 = settings.get_string('text-l1') || settings.get_default_value('text-l1').get_string()
-            let text2 = settings.get_string('text-l2') || settings.get_default_value('text-l2').get_string()
-            let vl2 = settings.get_double('l2-vertical') || settings.get_default_value('l2-vertical').get_double()
-            let hl2 = settings.get_double('l2-horizontal') || settings.get_default_value('l2-horizontal').get_double()
-            this.label_1.text = text1
-            this.label_2.text = text2
-            let monitor = Main.layoutManager.primaryMonitor
-            let h = Math.floor(monitor.height * vl2 - this.label_2.height)
-            let w = Math.floor(monitor.width * hl2 - this.label_2.width)
-            this.label_2.set_position(w, h)
-            this.label_1.set_position(w, h - this.label_1.height)
+        let settings = this.settings
+        let text1 = settings.get_string('text-l1') || settings.get_default_value('text-l1').get_string()
+        let text2 = settings.get_string('text-l2') || settings.get_default_value('text-l2').get_string()
+        let vl2 = settings.get_double('l2-vertical') || settings.get_default_value('l2-vertical').get_double()
+        let hl2 = settings.get_double('l2-horizontal') || settings.get_default_value('l2-horizontal').get_double()
+
+        this.cleanup()
+        for (let monitor of Main.layoutManager.monitors) {
+            let label_1 = new St.Label({ style_class: 'label-1', text: '' })
+            let label_2 = new St.Label({ style_class: 'label-2', text: '' })
+            Main.layoutManager.addTopChrome(label_2, {"trackFullscreen": false})
+            Main.layoutManager.addTopChrome(label_1, {"trackFullscreen": false})
+            this.labels.push(label_1)
+            this.labels.push(label_2)
+            label_1.text = text1
+            label_2.text = text2
+            let h = Math.max(0, Math.floor(monitor.height * vl2 - label_2.height))
+            let w = Math.max(0, Math.floor(monitor.width * hl2 - label_2.width))
+            label_2.set_position(monitor.x + w, monitor.y + h)
+            label_1.set_position(monitor.x + w, monitor.y + h - label_1.height)
             if (this.loaded < 4) {
                 this.loaded++
                 Mainloop.timeout_add(1000, () => this.update())
@@ -55,20 +61,19 @@ class Extension {
     enable() {
         this.settings = ExtensionUtils.getSettings(Me.metadata['settings-schema'])
         this.handler_id = this.settings.connect('changed', () => this.update())
-        this.label_2 = new St.Label({ style_class: 'label-2', text: '' })
-        this.label_1 = new St.Label({ style_class: 'label-1', text: '' })
-        Main.layoutManager.addTopChrome(this.label_2, {"trackFullscreen": false})
-        Main.layoutManager.addTopChrome(this.label_1, {"trackFullscreen": false})
         this.update()
     }
 
+    cleanup() {
+        for (let label of this.labels) {
+            Main.layoutManager.removeChrome(label)
+            label.destroy()
+        }
+        this.labels = []
+    }
+
     disable() {
-        Main.layoutManager.removeChrome(this.label_1)
-        Main.layoutManager.removeChrome(this.label_2)
-        this.label_1.destroy()
-        this.label_2.destroy()
-        this.label_1 = null
-        this.label_2 = null
+        this.cleanup()
         this.settings.disconnect(this.handler_id)
         this.settings = null
         this.handler_id = null
