@@ -25,10 +25,8 @@ const Me = ExtensionUtils.getCurrentExtension()
 class Extension {
     constructor() {
         this.labels = []
-        this.loaded = 0
         this.settings = null
-        this.settings_handler_id = null
-        this.monitors_handler_id = null
+        this.handlers = []
     }
 
     update() {
@@ -41,8 +39,8 @@ class Extension {
 
         this.cleanup()
         for (let monitor of Main.layoutManager.monitors) {
-            let label_1 = new St.Label({ style_class: 'label-1', text: text1, opacity })
-            let label_2 = new St.Label({ style_class: 'label-2', text: text2, opacity })
+            let label_1 = new St.Label({style_class: 'label-1', text: text1, opacity})
+            let label_2 = new St.Label({style_class: 'label-2', text: text2, opacity})
             Main.layoutManager.addTopChrome(label_2, {"trackFullscreen": false})
             Main.layoutManager.addTopChrome(label_1, {"trackFullscreen": false})
             this.labels.push(label_1)
@@ -51,18 +49,7 @@ class Extension {
             let w = Math.max(0, Math.floor(monitor.width * hl2 - label_2.width))
             label_2.set_position(monitor.x + w, monitor.y + h)
             label_1.set_position(Math.min(monitor.x + w, monitor.x + monitor.width - label_1.width), monitor.y + h - label_1.height)
-            if (this.loaded < 4) {
-                this.loaded++
-                Mainloop.timeout_add(1000, () => this.update())
-            }
         }
-    }
-
-    enable() {
-        this.settings = ExtensionUtils.getSettings(Me.metadata['settings-schema'])
-        this.settings_handler_id = this.settings.connect('changed', () => this.update())
-        this.monitors_handler_id = Main.layoutManager.connect('monitors-changed', () => this.update())
-        this.update()
     }
 
     cleanup() {
@@ -73,13 +60,30 @@ class Extension {
         this.labels = []
     }
 
+    enable() {
+        this.settings = ExtensionUtils.getSettings(Me.metadata['settings-schema'])
+        this.handlers.push({
+            owner: this.settings,
+            id: this.settings.connect('changed', () => this.update())
+        })
+        this.handlers.push({
+            owner: Main.layoutManager,
+            id: Main.layoutManager.connect('monitors-changed', () => this.update())
+        })
+        this.handlers.push({
+            owner: Main.layoutManager,
+            id: Main.layoutManager.connect('startup-complete', () => this.update())
+        })
+        this.update()
+    }
+
     disable() {
         this.cleanup()
-        this.settings.disconnect(this.settings_handler_id)
-        Main.layoutManager.disconnect(this.monitors_handler_id)
+        for (let handler of this.handlers) {
+            handler.owner.disconnect(handler.id)
+        }
+        this.handlers = []
         this.settings = null
-        this.settings_handler_id = null
-        this.monitors_handler_id = null
     }
 }
 
