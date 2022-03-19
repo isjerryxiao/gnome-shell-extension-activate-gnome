@@ -19,5 +19,8 @@ ln -s $(realpath activate_gnome/activate_gnome@isjerryxiao) ~/.local/share/gnome
 ## And customizable
 ![customize](https://pb.meson.cc/s/c7uvyjrd.png)  
 
+## Using KDE Plasma?
+Check [this](https://github.com/RedL0tus/Activate-Plasma) out.  
+
 ## Contributing
 * Copyright © 2021 JerryXiao
