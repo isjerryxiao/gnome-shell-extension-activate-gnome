@@ -18,5 +18,9 @@
       <default>0.92</default>
       <summary>Horizontal position of line 2</summary>
     </key>
+    <key name="opacity" type="d">
+      <default>102</default>
+      <summary>Opacity</summary>
+    </key>
   </schema>
 </schemalist>

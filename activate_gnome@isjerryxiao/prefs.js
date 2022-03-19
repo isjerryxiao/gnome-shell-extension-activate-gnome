@@ -59,12 +59,11 @@ function buildPrefsWidget() {
     prefsWidget.append(vlabel)
 
     let ventry = new Gtk.SpinButton({
+        adjustment: new Gtk.Adjustment({lower: 0.01, upper: 1.0, step_increment: 0.01, page_increment: 0.1}),
         margin_top: 6,
         numeric: true,
         digits: 4,
     })
-    ventry.set_range(0.0, 1.0)
-    ventry.set_increments(0.01, 0.1)
     prefsWidget.append(ventry)
 
     // l2-horizontal
@@ -76,30 +75,48 @@ function buildPrefsWidget() {
     prefsWidget.append(hlabel)
 
     let hentry = new Gtk.SpinButton({
+        adjustment: new Gtk.Adjustment({lower: 0.01, upper: 1.0, step_increment: 0.01, page_increment: 0.1}),
         margin_top: 6,
         numeric: true,
         digits: 4,
     })
-    hentry.set_range(0.0, 1.0)
-    hentry.set_increments(0.01, 0.1)
     prefsWidget.append(hentry)
+
+    // opacity
+    let olabel = new Gtk.Label({
+        label: '<b>Opacity</b>',
+        margin_top: 6,
+        use_markup: true,
+    })
+    prefsWidget.append(olabel)
+
+    let oentry = new Gtk.Scale({
+        adjustment: new Gtk.Adjustment({lower: 0.1, upper: 255, step_increment: 0.1, page_increment: 1}),
+        margin_top: 6,
+        draw_value: false,
+        digits: 1,
+    })
+    prefsWidget.append(oentry)
 
     let resetbtn = new Gtk.Button({
         label: 'reset',
         margin_top: 12,
+        margin_bottom: 6,
     })
     resetbtn.connect('clicked', () => {
         this.settings.reset('text-l1')
         this.settings.reset('text-l2')
         this.settings.reset('l2-vertical')
         this.settings.reset('l2-horizontal')
+        this.settings.reset('opacity')
     })
     prefsWidget.append(resetbtn)
 
     this.settings.bind('text-l1', l1entry, 'text', Gio.SettingsBindFlags.DEFAULT)
     this.settings.bind('text-l2', l2entry, 'text', Gio.SettingsBindFlags.DEFAULT)
-    this.settings.bind('l2-vertical', ventry, 'value', Gio.SettingsBindFlags.DEFAULT)
-    this.settings.bind('l2-horizontal', hentry, 'value', Gio.SettingsBindFlags.DEFAULT)
+    this.settings.bind('l2-vertical', ventry.adjustment, 'value', Gio.SettingsBindFlags.DEFAULT)
+    this.settings.bind('l2-horizontal', hentry.adjustment, 'value', Gio.SettingsBindFlags.DEFAULT)
+    this.settings.bind('opacity', oentry.adjustment, 'value', Gio.SettingsBindFlags.DEFAULT)
 
     return prefsWidget
 }

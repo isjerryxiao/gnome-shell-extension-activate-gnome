@@ -2,15 +2,14 @@
 .label-1 {
     font-size: 36px;
     font-weight: normal;
-    color: rgba(255, 255, 255, 0.4);
-    background-color: rgba(10, 10, 10, 0);
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(0, 0, 0, 0);
     border-radius: 5px;
 }
 .label-2 {
     font-size: 26px;
     font-weight: normal;
-    color: rgba(255, 255, 255, 0.4);
-    background-color: rgba(10, 10, 10, 0);
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(0, 0, 0, 0);
     border-radius: 5px;
 }
-
