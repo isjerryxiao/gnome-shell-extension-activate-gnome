@@ -27,15 +27,15 @@ class Extension {
         this.labels = []
         this.settings = null
         this.handlers = []
+        this.settings_get = (method, key) => this.settings[method](key) || this.settings.get_default_value(key)[method]()
     }
 
     update() {
-        let settings = this.settings
-        let text1 = settings.get_string('text-l1') || settings.get_default_value('text-l1').get_string()
-        let text2 = settings.get_string('text-l2') || settings.get_default_value('text-l2').get_string()
-        let vl2 = settings.get_double('l2-vertical') || settings.get_default_value('l2-vertical').get_double()
-        let hl2 = settings.get_double('l2-horizontal') || settings.get_default_value('l2-horizontal').get_double()
-        let opacity = settings.get_double('opacity') || settings.get_default_value('opacity').get_double()
+        let text1 = this.settings_get('get_string', 'text-l1')
+        let text2 = this.settings_get('get_string', 'text-l2')
+        let vl2 = this.settings_get('get_double', 'l2-vertical')
+        let hl2 = this.settings_get('get_double', 'l2-horizontal')
+        let opacity = this.settings_get('get_double', 'opacity')
 
         this.cleanup()
         for (let monitor of Main.layoutManager.monitors) {
@@ -74,7 +74,7 @@ class Extension {
             owner: Main.layoutManager,
             id: Main.layoutManager.connect('startup-complete', () => this.update())
         })
-        this.update()
+        if (!Main.layoutManager._startingUp) this.update()
     }
 
     disable() {
