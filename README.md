@@ -1,7 +1,7 @@
-# Activate Gnome
+# Activate GNOME
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](./LICENSE)  
 
-A gnome-shell extension to show 'Activate Gnome' watermark.  
+A gnome-shell extension to show 'Activate GNOME' watermark.  
 
 ## Installation
 ### From extensions.gnome.org

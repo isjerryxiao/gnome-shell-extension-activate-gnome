@@ -1,6 +1,6 @@
 {
-    "name": "Activate Gnome",
-    "description": "Shows Activate Gnome watermark on your screen.",
+    "name": "Activate GNOME",
+    "description": "Shows Activate GNOME watermark on your screen.",
     "uuid": "activate_gnome@isjerryxiao",
     "settings-schema": "org.gnome.shell.extensions.activate_gnome",
     "shell-version": [
@@ -8,6 +8,6 @@
         "41",
         "42"
     ],
-    "version": 5,
+    "version": 6,
     "url": "https://github.com/isjerryxiao/gnome-shell-extension-activate-gnome"
 }
