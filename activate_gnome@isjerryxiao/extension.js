@@ -35,12 +35,16 @@ class Extension {
         let text2 = this.settings_get('get_string', 'text-l2')
         let vl2 = this.settings_get('get_double', 'l2-vertical')
         let hl2 = this.settings_get('get_double', 'l2-horizontal')
+        let size1 = parseInt(this.settings_get('get_double', 'size-l1'))
+        let size2 = parseInt(this.settings_get('get_double', 'size-l2'))
         let opacity = this.settings_get('get_double', 'opacity')
 
         this.cleanup()
         for (let monitor of Main.layoutManager.monitors) {
             let label_1 = new St.Label({style_class: 'label-1', text: text1, opacity})
             let label_2 = new St.Label({style_class: 'label-2', text: text2, opacity})
+            label_1.set_style(`font-size: ${size1}px`)
+            label_2.set_style(`font-size: ${size2}px`)
             Main.layoutManager.uiGroup.add_actor(label_2, {"trackFullscreen": false})
             Main.layoutManager.uiGroup.add_actor(label_1, {"trackFullscreen": false})
             this.labels.push(label_1)
