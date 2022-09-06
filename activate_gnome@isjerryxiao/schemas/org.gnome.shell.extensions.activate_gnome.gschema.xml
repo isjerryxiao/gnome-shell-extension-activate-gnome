@@ -11,23 +11,23 @@
       <summary>Text to display on line 2</summary>
     </key>
     <key name="l2-vertical" type="d">
-      <default>0.9444444444444444</default>
+      <default>0.98</default>
       <summary>Vertical position of line 2</summary>
     </key>
     <key name="l2-horizontal" type="d">
-      <default>0.92</default>
+      <default>0.98</default>
       <summary>Horizontal position of line 2</summary>
     </key>
     <key name="opacity" type="d">
-      <default>102</default>
+      <default>128</default>
       <summary>Opacity</summary>
     </key>
     <key name="size-l1" type="d">
-      <default>36</default>
+      <default>22</default>
       <summary>Text size of line 1 (px)</summary>
     </key>
     <key name="size-l2" type="d">
-      <default>26</default>
+      <default>11</default>
       <summary>Text size of line 2 (px)</summary>
     </key>
   </schema>
