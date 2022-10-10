@@ -23,4 +23,4 @@ ln -s $(realpath activate_gnome/activate_gnome@isjerryxiao) ~/.local/share/gnome
 Check [this](https://github.com/RedL0tus/Activate-Plasma) out.  
 
 ## Contributing
-* Copyright © 2021 JerryXiao
+* Copyright © 2022 JerryXiao
