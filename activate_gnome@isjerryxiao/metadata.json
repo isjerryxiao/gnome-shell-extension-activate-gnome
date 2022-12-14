@@ -1,6 +1,6 @@
 {
     "name": "Activate GNOME",
-    "description": "Shows Activate GNOME watermark on your screen.",
+    "description": "Shows Activate GNOME watermark on your screen. Migrating from Windows has never been easier!",
     "uuid": "activate_gnome@isjerryxiao",
     "settings-schema": "org.gnome.shell.extensions.activate_gnome",
     "shell-version": [
