@@ -14,16 +14,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
  * SPDX-License-Identifier: GPL-3.0-or-later
- * /
-/* exported init */
-const St = imports.gi.St
-const Main = imports.ui.main
-const Mainloop = imports.mainloop
-const ExtensionUtils = imports.misc.extensionUtils
-const Me = ExtensionUtils.getCurrentExtension()
+ */
 
-class Extension {
-    constructor() {
+import St from 'gi://St'
+import * as Main from 'resource:///org/gnome/shell/ui/main.js'
+import { Extension } from 'resource:///org/gnome/shell/extensions/extension.js'
+
+export default class ActivateGnomeExtension extends Extension {
+    constructor(metadata) {
+        super(metadata)
         this.labels = []
         this.settings = null
         this.handlers = []
@@ -65,7 +64,7 @@ class Extension {
     }
 
     enable() {
-        this.settings = ExtensionUtils.getSettings(Me.metadata['settings-schema'])
+        this.settings = this.getSettings()
         this.handlers.push({
             owner: this.settings,
             id: this.settings.connect('changed', () => this.update())
@@ -89,9 +88,4 @@ class Extension {
         this.handlers = []
         this.settings = null
     }
-}
-
-function init() {
-    log(`initializing ${Me.metadata.name}`)
-    return new Extension()
 }
