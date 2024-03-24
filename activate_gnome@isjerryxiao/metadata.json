@@ -4,8 +4,9 @@
     "uuid": "activate_gnome@isjerryxiao",
     "settings-schema": "org.gnome.shell.extensions.activate_gnome",
     "shell-version": [
-        "45"
+        "45",
+        "46"
     ],
-    "version": 10,
+    "version": 11,
     "url": "https://github.com/isjerryxiao/gnome-shell-extension-activate-gnome"
 }

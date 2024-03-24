@@ -44,8 +44,9 @@ export default class ActivateGnomeExtension extends Extension {
             let label_2 = new St.Label({style_class: 'label-2', text: text2, opacity})
             label_1.set_style(`font-size: ${size1}px`)
             label_2.set_style(`font-size: ${size2}px`)
-            Main.layoutManager.uiGroup.add_actor(label_2, {"trackFullscreen": false})
-            Main.layoutManager.uiGroup.add_actor(label_1, {"trackFullscreen": false})
+            let params = {"trackFullscreen": false, "affectsStruts": false, "affectsInputRegion": true}
+            Main.layoutManager.addTopChrome(label_2, params)
+            Main.layoutManager.addTopChrome(label_1, params)
             this.labels.push(label_1)
             this.labels.push(label_2)
             let h = Math.max(0, Math.floor(monitor.height * vl2 - label_2.height))
@@ -57,7 +58,7 @@ export default class ActivateGnomeExtension extends Extension {
 
     cleanup() {
         for (let label of this.labels) {
-            Main.layoutManager.uiGroup.remove_actor(label)
+            Main.layoutManager.removeChrome(label)
             label.destroy()
         }
         this.labels = []
