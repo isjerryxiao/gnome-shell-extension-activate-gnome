@@ -6,8 +6,9 @@
     "shell-version": [
         "45",
         "46",
-        "47"
+        "47",
+        "48"
     ],
-    "version": 12,
+    "version": 13,
     "url": "https://github.com/isjerryxiao/gnome-shell-extension-activate-gnome"
 }
