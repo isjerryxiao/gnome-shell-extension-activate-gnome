@@ -44,7 +44,7 @@ export default class ActivateGnomeExtension extends Extension {
             let label_2 = new St.Label({style_class: 'label-2', text: text2, opacity})
             label_1.set_style(`font-size: ${size1}px`)
             label_2.set_style(`font-size: ${size2}px`)
-            let params = {"trackFullscreen": false, "affectsStruts": false, "affectsInputRegion": true}
+            let params = {"trackFullscreen": false, "affectsStruts": false}
             Main.layoutManager.addTopChrome(label_2, params)
             Main.layoutManager.addTopChrome(label_1, params)
             this.labels.push(label_1)
